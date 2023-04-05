@@ -26,4 +26,4 @@ export const check = async () => {
 export const getUser = async (email) => {
   const { data } = await $authHost.get(`api/user/${email}`);
   return data;
-}
+};

@@ -10,7 +10,6 @@ import { FaReact, FaJava } from "react-icons/fa";
 import { Layout, Menu } from "antd";
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../../index";
 import { fetchCourses } from "../../http/coursesApi";
 import { useSelector, useDispatch } from "react-redux";
 import { setCourses } from "../../store/slices/courseSlice";
@@ -18,14 +17,15 @@ import { setCourses } from "../../store/slices/courseSlice";
 const { Sider } = Layout;
 
 const SideBar = ({ collapsed }) => {
-  const course = useSelector((state) => state.course.courses);
+  const course = useSelector((state) => state.course);
   const dispatch = useDispatch();
 
   useEffect(() => {
     fetchCourses().then((data) => {
+      console.log(data);
       dispatch(setCourses(data));
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <Sider

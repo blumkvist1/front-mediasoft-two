@@ -2,31 +2,19 @@ import { observer } from "mobx-react-lite";
 import React, { useContext, useEffect } from "react";
 import { useNavigate, redirect } from "react-router-dom";
 import { Button, Empty, Space, Row } from "antd";
-import { Context } from "../..";
-import { getUser } from "../../http/userApi";
 
-const Profile = observer(() => {
-  const { user } = useContext(Context);
+import { getUser } from "../../http/userApi";
+import { useSelector, useDispatch } from "react-redux";
+import { removeUser } from "../../store/slices/userSlice";
+
+const Profile = () => {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getUser(user.user.email)
-      .then((data) => {
-        console.log(data);
-        user.setUserInfo(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  console.log(user.userInfo);
-
   const logOut = () => {
-    user.setAuth(false);
-    user.setUser(null);
-    //redirect("/login");
-    redirect("/");
+    dispatch(removeUser());
+    navigate("/login");
   };
 
   return (
@@ -151,6 +139,6 @@ const Profile = observer(() => {
       )}
     </>
   );
-});
+};
 
 export default Profile;
