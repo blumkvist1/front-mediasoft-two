@@ -11,17 +11,19 @@ import { Layout, Menu } from "antd";
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../index";
-import { observer } from "mobx-react-lite";
 import { fetchCourses } from "../../http/coursesApi";
+import { useSelector, useDispatch } from "react-redux";
+import { setCourses } from "../../store/slices/courseSlice";
 
 const { Sider } = Layout;
 
-const SideBar = observer(({ collapsed }) => {
-  const { course } = useContext(Context);
+const SideBar = ({ collapsed }) => {
+  const course = useSelector((state) => state.course.courses);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchCourses().then((data) => {
-      course.setCourses(data);
+      dispatch(setCourses(data));
     });
   }, []);
 
@@ -79,6 +81,6 @@ const SideBar = observer(({ collapsed }) => {
       </Menu>
     </Sider>
   );
-});
+};
 
 export default SideBar;
