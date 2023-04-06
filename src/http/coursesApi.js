@@ -1,7 +1,7 @@
 import { $authHost, $host } from "./index";
 
-export const fetchCourses = async () => {
-  const { data } = await $authHost.get("api/courses");
+export const fetchCourses = async (userId) => {
+  const { data } = await $authHost.get(`api/courses/${userId}`);
   return data;
 };
 

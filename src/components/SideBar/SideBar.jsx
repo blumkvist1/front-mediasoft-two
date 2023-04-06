@@ -18,10 +18,11 @@ const { Sider } = Layout;
 
 const SideBar = ({ collapsed }) => {
   const course = useSelector((state) => state.course);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchCourses().then((data) => {
+    fetchCourses(user.user.id).then((data) => {
       dispatch(setCourses(data));
     });
   }, [dispatch]);
@@ -50,12 +51,12 @@ const SideBar = ({ collapsed }) => {
         <Menu.ItemGroup key="gr2" title="Мои курсы">
           {course.courses.map((courseItem) => (
             <Menu.Item
-              key={courseItem.id}
+              key={courseItem.course.id}
               icon={<FaReact />}
-              onClick={() => dispatch(setSelectedCourse(courseItem))}
+              onClick={() => dispatch(setSelectedCourse(courseItem.course))}
             >
-              <Link to={`/${courseItem.workname}`}>
-                <span>{courseItem.name}</span>
+              <Link to={`/${courseItem.course.workname}`}>
+                <span>{courseItem.course.name}</span>
               </Link>
             </Menu.Item>
           ))}
@@ -78,22 +79,16 @@ const SideBar = ({ collapsed }) => {
           </Menu.Item>
         </Menu.ItemGroup>
         <Menu.ItemGroup key="gr4" title="Аналитика">
-            <Menu.Item
-              key="igr8"
-              icon={<FaReact />}
-            >
-              <Link to={`/user_analitics`}>
-                <span>Пользователи</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item
-              key="igr9"
-              icon={<FaReact />}
-            >
-              <Link to={`/courses_analitics`}>
-                <span>Курсы</span>
-              </Link>
-            </Menu.Item>
+          <Menu.Item key="igr8" icon={<FaReact />}>
+            <Link to={`/user_analitics`}>
+              <span>Пользователи</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="igr9" icon={<FaReact />}>
+            <Link to={`/courses_analitics`}>
+              <span>Курсы</span>
+            </Link>
+          </Menu.Item>
         </Menu.ItemGroup>
       </Menu>
     </Sider>
