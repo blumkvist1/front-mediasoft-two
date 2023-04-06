@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 import { Card, List, Avatar } from "antd";
 import { Link } from "react-router-dom";
-import { observer } from "mobx-react-lite";
 import { fetchLesson } from "../http/lessonsApi";
-import { Context } from "..";
+
+import { useSelector } from "react-redux";
 
 const data = [
   {
@@ -26,9 +26,9 @@ export async function loader({ params }) {
   return { lesson };
 }
 
-const Lesson = observer(() => {
+const Lesson = () => {
   let { id, name } = useParams();
-  const { course } = useContext(Context);
+  const course = useSelector((state) => state.course);
 
   const { lesson } = useLoaderData();
 
@@ -99,6 +99,6 @@ const Lesson = observer(() => {
       />
     </Card>
   );
-});
+};
 
 export default Lesson;

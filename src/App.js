@@ -1,5 +1,5 @@
 import { RouterProvider, useNavigate } from "react-router-dom";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { authRouter, publicRouter } from "./routes/routers";
 import { Spin } from "antd";
 import { check } from "./http/userApi";

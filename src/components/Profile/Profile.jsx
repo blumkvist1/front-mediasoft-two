@@ -1,9 +1,6 @@
-import { observer } from "mobx-react-lite";
-import React, { useContext, useEffect } from "react";
-import { useNavigate, redirect } from "react-router-dom";
-import { Button, Empty, Space, Row } from "antd";
-
-import { getUser } from "../../http/userApi";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Empty, Space } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../../store/slices/userSlice";
 

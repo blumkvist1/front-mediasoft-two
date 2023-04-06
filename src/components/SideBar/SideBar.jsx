@@ -8,11 +8,11 @@ import {
 
 import { FaReact, FaJava } from "react-icons/fa";
 import { Layout, Menu } from "antd";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchCourses } from "../../http/coursesApi";
 import { useSelector, useDispatch } from "react-redux";
-import { setCourses } from "../../store/slices/courseSlice";
+import { setCourses, setSelectedCourse } from "../../store/slices/courseSlice";
 
 const { Sider } = Layout;
 
@@ -22,7 +22,6 @@ const SideBar = ({ collapsed }) => {
 
   useEffect(() => {
     fetchCourses().then((data) => {
-      console.log(data);
       dispatch(setCourses(data));
     });
   }, [dispatch]);
@@ -53,7 +52,7 @@ const SideBar = ({ collapsed }) => {
             <Menu.Item
               key={courseItem.id}
               icon={<FaReact />}
-              onClick={() => course.setSelectedCourse(courseItem)}
+              onClick={() => dispatch(setSelectedCourse(courseItem))}
             >
               <Link to={`/${courseItem.workname}`}>
                 <span>{courseItem.name}</span>

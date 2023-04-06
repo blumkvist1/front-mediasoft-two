@@ -13,7 +13,7 @@ export const courseSlice = createSlice({
       state.courses = action.payload;
     },
     setSelectedCourse: (state, action) => {
-      state.selectedCourse = action.payload.selectedCourse;
+      state.selectedCourse = action.payload;
     },
   },
 });

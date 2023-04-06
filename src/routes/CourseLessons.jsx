@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   Card,
   Button,
@@ -11,10 +11,10 @@ import {
   TimePicker,
 } from "antd";
 import { Link, NavLink, useLoaderData } from "react-router-dom";
-import { Context } from "../index.js";
 
-import { observer } from "mobx-react-lite";
 import { fetchLessons } from "../http/lessonsApi.js";
+import { useSelector, useDispatch } from "react-redux";
+import { setLessons, setSelectedLesson } from "../store/slices/lessonSlice.js";
 
 const layout = {
   labelCol: {
@@ -24,7 +24,6 @@ const layout = {
     span: 24,
   },
 };
-
 
 const validateMessages = {
   required: "Поле ${label} обязательно для заполнения!",
@@ -37,7 +36,6 @@ const validateMessages = {
   },
 };
 
-
 const onFinish = (values) => {
   console.log(values);
 };
@@ -47,17 +45,23 @@ export async function loader({ params }) {
   return { courseLessons };
 }
 
-
-
-const CourseLessons = observer(() => {
-  const { course, lesson } = useContext(Context);
+const CourseLessons = () => {
+  const dispatch = useDispatch();
+  const course = useSelector((state) => state.course);
   const { courseLessons } = useLoaderData();
 
-  let lessons = courseLessons.lessons;
+  const lessons = courseLessons.lessons;
 
   const click = (lessonItem) => {
-    lesson.setSelectedLesson(lessonItem);
+    dispatch(setSelectedLesson(lessonItem));
   };
+
+  // useEffect(async () => {
+  //   const courseLessons = await fetchLessons(course.selectedCourse.workname);
+  //   const less = courseLessons.lessons;
+  //   dispatch(setLessons(less));
+
+  // }, [course.selectedCourse.workname])
 
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -215,12 +219,14 @@ const CourseLessons = observer(() => {
               htmlType="submit"
               onClick={handleOk}
               confirmLoading={confirmLoading}
-            >Создать</Button>
+            >
+              Создать
+            </Button>
           </Form.Item>
         </Form>
       </Modal>
     </>
   );
-});
+};
 
 export default CourseLessons;
