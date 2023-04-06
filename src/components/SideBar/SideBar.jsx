@@ -77,6 +77,24 @@ const SideBar = ({ collapsed }) => {
             </Link>
           </Menu.Item>
         </Menu.ItemGroup>
+        <Menu.ItemGroup key="gr4" title="Аналитика">
+            <Menu.Item
+              key="igr8"
+              icon={<FaReact />}
+            >
+              <Link to={`/user_analitics`}>
+                <span>Пользователи</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item
+              key="igr9"
+              icon={<FaReact />}
+            >
+              <Link to={`/courses_analitics`}>
+                <span>Курсы</span>
+              </Link>
+            </Menu.Item>
+        </Menu.ItemGroup>
       </Menu>
     </Sider>
   );
