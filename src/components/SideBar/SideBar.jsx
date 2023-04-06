@@ -8,22 +8,23 @@ import {
 
 import { FaReact, FaJava } from "react-icons/fa";
 import { Layout, Menu } from "antd";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../../index";
-import { observer } from "mobx-react-lite";
 import { fetchCourses } from "../../http/coursesApi";
+import { useSelector, useDispatch } from "react-redux";
+import { setCourses, setSelectedCourse } from "../../store/slices/courseSlice";
 
 const { Sider } = Layout;
 
-const SideBar = observer(({ collapsed }) => {
-  const { course } = useContext(Context);
+const SideBar = ({ collapsed }) => {
+  const course = useSelector((state) => state.course);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchCourses().then((data) => {
-      course.setCourses(data);
+      dispatch(setCourses(data));
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <Sider
@@ -51,7 +52,7 @@ const SideBar = observer(({ collapsed }) => {
             <Menu.Item
               key={courseItem.id}
               icon={<FaReact />}
-              onClick={() => course.setSelectedCourse(courseItem)}
+              onClick={() => dispatch(setSelectedCourse(courseItem))}
             >
               <Link to={`/${courseItem.workname}`}>
                 <span>{courseItem.name}</span>
@@ -79,6 +80,6 @@ const SideBar = observer(({ collapsed }) => {
       </Menu>
     </Sider>
   );
-});
+};
 
 export default SideBar;

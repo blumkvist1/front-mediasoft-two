@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import CourseLessons, { loader as courseLoader } from "./CourseLessons";
-
 import React from "react";
 import Calendar from "./apps/CalendarPage";
 import Kanban from "./apps/Kanban";

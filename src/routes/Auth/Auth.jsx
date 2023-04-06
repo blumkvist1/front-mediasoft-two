@@ -1,21 +1,17 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Card, Layout } from "antd";
-import React, { useContext, useState } from "react";
-import {
-  NavLink,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
-import { observer } from "mobx-react-lite";
+import React, { useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./Auth.css";
-
-import { Context } from "../../index";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/slices/userSlice";
 import { login, registration } from "../../http/userApi";
 
 const { Content } = Layout;
 
-const Auth = observer(() => {
-  const { user } = useContext(Context);
+const Auth = () => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const location = useLocation();
   const isLogin = location.pathname === "/login";
@@ -32,8 +28,7 @@ const Auth = observer(() => {
       } else {
         data = await registration(email, password);
       }
-      user.setUser(user);
-      user.setAuth(true);
+      dispatch(setUser(data));
       navigate("/");
       return data;
     } catch (e) {
@@ -195,5 +190,5 @@ const Auth = observer(() => {
       </Content>
     </Layout>
   );
-});
+};
 export default Auth;

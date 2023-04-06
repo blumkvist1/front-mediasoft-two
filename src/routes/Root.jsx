@@ -12,30 +12,43 @@ import {
   theme,
   Badge,
   Space,
-  Button,
   Drawer,
   Avatar,
   Row,
   Col,
 } from "antd";
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import SideBar from "../components/SideBar/SideBar";
 import { Outlet } from "react-router-dom";
 import Profile from "../components/Profile/Profile";
 import Chat from "../components/Chat/Chat";
-import { Context } from "../index";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserInfo } from "../store/slices/userSlice";
+import { getUser } from "../http/userApi";
 
 const { Header, Content } = Layout;
 
 const Root = () => {
-  const { user } = useContext(Context);
-  const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const [collapsed, setCollapsed] = useState(false);
   const [openProfile, setProfileOpen] = useState(false);
   const [openChat, setChatOpen] = useState(false);
+
+  useEffect(() => {
+    getUser(user.user.email)
+      .then((data) => {
+        dispatch(setUserInfo(data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <Layout>
