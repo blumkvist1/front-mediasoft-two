@@ -8,7 +8,7 @@ import Pomodoro from "./apps/Pomodoro";
 import Lesson, { loader as lessonLoader } from "./Lesson";
 import CourseInfo from "./CourseInfo";
 import Auth from "./Auth/Auth";
-import CoursesAnalitics from "./analitics/CoursesAnalitics";
+import CoursesAnalitics, {loader as coursesAnaliticsLoader} from "./analitics/CoursesAnalitics";
 import UserAnalitics from "./analitics/UserAnalitics";
 
 export let authRouter = createBrowserRouter([
@@ -58,6 +58,7 @@ export let authRouter = createBrowserRouter([
       },
       {
         path: "/courses_analitics",
+        loader: coursesAnaliticsLoader, 
         element: <CoursesAnalitics/>,
       },
     ],
