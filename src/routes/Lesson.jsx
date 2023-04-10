@@ -1,6 +1,6 @@
 import React from "react";
 import { useLoaderData, useParams } from "react-router-dom";
-import { Card, List, Avatar } from "antd";
+import { Card, List, Avatar, Empty } from "antd";
 import { Link } from "react-router-dom";
 import { fetchLesson } from "../http/lessonsApi";
 
@@ -50,14 +50,20 @@ const Lesson = () => {
       <br />
       <div>
         <h1>Видеозапись урока</h1>
-        <iframe
-          width="1120"
-          height="630"
-          src={lesson.video.replace("youtu.be", "www.youtube.com/embed")}
-          // src="https://www.youtube.com/embed/OdEQQ4bjvWA"
-          allow="fullscreen"
-          title="video"
-        ></iframe>
+        <>
+          {lesson.video.includes("youtu.be") ? (
+            <iframe
+              width="1120"
+              height="630"
+              src={lesson.video.replace("youtu.be", "www.youtube.com/embed")}
+              // src="https://www.youtube.com/embed/OdEQQ4bjvWA"
+              allow="fullscreen"
+              title="video"
+            ></iframe>
+          ) : (
+            <Empty description="Видео в данный момент недоступно, пожалуйста перезвоните позднее" />
+          )}
+        </>
       </div>
       <br />
       <br />
@@ -65,7 +71,6 @@ const Lesson = () => {
         <h1>Материалы урока</h1>
         <Link to="">{lesson.presentation}</Link>
       </div>
-
       <br />
       <br />
       <div>

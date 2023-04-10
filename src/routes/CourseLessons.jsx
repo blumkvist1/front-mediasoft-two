@@ -10,12 +10,12 @@ import {
   DatePicker,
   TimePicker,
 } from "antd";
-import { Link, NavLink, useLoaderData } from "react-router-dom";
+import { Link, NavLink, useLoaderData, useNavigate } from "react-router-dom";
 
-import { fetchLessons } from "../http/lessonsApi.js";
+import { createLesson, fetchLessons } from "../http/lessonsApi.js";
 import { useSelector, useDispatch } from "react-redux";
-import { setLessons, setSelectedLesson } from "../store/slices/lessonSlice.js";
-import { toDate, toTime } from "../helpers/dateTime.js";
+import { setSelectedLesson } from "../store/slices/lessonSlice.js";
+import { toDate, toISOS, toTime } from "../helpers/dateTime.js";
 
 const layout = {
   labelCol: {
@@ -37,10 +37,6 @@ const validateMessages = {
   },
 };
 
-const onFinish = (values) => {
-  console.log(values);
-};
-
 export async function loader({ params }) {
   const courseLessons = await fetchLessons(params.name);
   return { courseLessons };
@@ -50,19 +46,17 @@ const CourseLessons = () => {
   const dispatch = useDispatch();
   const course = useSelector((state) => state.course);
   const { courseLessons } = useLoaderData();
-
   const lessons = courseLessons.lessons;
-
+  const navigate = useNavigate();
   const click = (lessonItem) => {
     dispatch(setSelectedLesson(lessonItem));
   };
 
-  // useEffect(async () => {
-  //   const courseLessons = await fetchLessons(course.selectedCourse.workname);
-  //   const less = courseLessons.lessons;
-  //   dispatch(setLessons(less));
-
-  // }, [course.selectedCourse.workname])
+  const onFinish = ({ lesson }) => {
+    lesson.name = lesson.name.trim();
+    lesson.dateTime = toISOS(lesson.date, lesson.time);
+    createLesson(lesson, course.selectedCourse.workname).then(navigate(""));
+  };
 
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -99,28 +93,31 @@ const CourseLessons = () => {
         }
       >
         {lessons.map((lessonItem) => (
-          <Link
-            to={`/${course.selectedCourse.workname}/lesson/${lessonItem.number}`}
-            key={lessonItem.id}
-          >
-            <Card
+          <>
+            <h1>Урок №{lessonItem.number}</h1>
+            <Link
+              to={`/${course.selectedCourse.workname}/lesson/${lessonItem.number}`}
               key={lessonItem.id}
-              type="inner"
-              title={`Урок №${lessonItem.number} ${lessonItem.name}`}
-              extra={
-                <p>
-                  {toDate(lessonItem.datetime) +
-                    " " +
-                    toTime(lessonItem.datetime)}
-                </p>
-              }
-              hoverable
-              style={{ marginBottom: 20 }}
-              onClick={click(lessonItem)}
             >
-              <p>{lessonItem.name}</p>
-            </Card>
-          </Link>
+              <Card
+                key={lessonItem.id}
+                type="inner"
+                title={`${lessonItem.name}`}
+                extra={
+                  <p>
+                    {toDate(lessonItem.datetime) +
+                      " " +
+                      toTime(lessonItem.datetime)}
+                  </p>
+                }
+                hoverable
+                style={{ marginBottom: 20 }}
+                onClick={click(lessonItem)}
+              >
+                <p>{lessonItem.name}</p>
+              </Card>
+            </Link>
+          </>
         ))}
       </Card>
       <Modal
@@ -165,7 +162,7 @@ const CourseLessons = () => {
                 required: true,
                 type: "number",
                 min: 0,
-                max: 99,
+                max: 15,
               },
             ]}
           >
