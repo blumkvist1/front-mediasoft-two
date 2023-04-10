@@ -80,7 +80,7 @@ const SideBar = ({ collapsed }) => {
         </Menu.ItemGroup>
         <Menu.ItemGroup key="gr4" title="Аналитика">
           <Menu.Item key="igr8" icon={<FaReact />}>
-            <Link to={`/user_analitics`}>
+            <Link to={`/users_analitics`}>
               <span>Пользователи</span>
             </Link>
           </Menu.Item>

@@ -8,8 +8,12 @@ import Pomodoro from "./apps/Pomodoro";
 import Lesson, { loader as lessonLoader } from "./Lesson";
 import CourseInfo from "./CourseInfo";
 import Auth from "./Auth/Auth";
-import CoursesAnalitics, {loader as coursesAnaliticsLoader} from "./analitics/CoursesAnalitics";
-import UserAnalitics from "./analitics/UserAnalitics";
+import CoursesAnalitics, {
+  loader as coursesAnaliticsLoader,
+} from "./analitics/CoursesAnalitics";
+import UsersAnalitics, {
+  loader as usersAnaliticsLoader,
+} from "./analitics/UsersAnalitics";
 
 export let authRouter = createBrowserRouter([
   {
@@ -53,13 +57,14 @@ export let authRouter = createBrowserRouter([
         element: <Calendar />,
       },
       {
-        path: "/user_analitics",
-        element: <UserAnalitics />,
+        path: "/users_analitics",
+        loader: usersAnaliticsLoader,
+        element: <UsersAnalitics />,
       },
       {
         path: "/courses_analitics",
-        loader: coursesAnaliticsLoader, 
-        element: <CoursesAnalitics/>,
+        loader: coursesAnaliticsLoader,
+        element: <CoursesAnalitics />,
       },
     ],
   },
