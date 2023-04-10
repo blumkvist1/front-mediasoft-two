@@ -1,8 +1,9 @@
 import React from "react";
 import { useLoaderData, useParams } from "react-router-dom";
-import { Card, List, Avatar, Empty } from "antd";
+import { Card, List, Avatar, Empty, Upload, Button } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { fetchLesson } from "../http/lessonsApi";
+import { fetchLesson, sendHomeWork } from "../http/lessonsApi";
 
 import { useSelector } from "react-redux";
 
@@ -32,12 +33,22 @@ const Lesson = () => {
 
   const { lesson } = useLoaderData();
 
+  const sendFile = ({ file }) => {
+    sendHomeWork(file);
+  };
+
   return (
     <Card
       title={`Урок №${lesson.number} ${lesson.name} для курса ${course.selectedCourse.name}`}
       extra={<p>More</p>}
     >
       <div>
+        <h1>Прикрепить ответ</h1>
+
+        <Upload customRequest={sendFile} listType="picture">
+          <Button icon={<UploadOutlined />}>Загрузить файл</Button>
+        </Upload>
+
         <h1> Об уроке</h1>
         <p>
           Информация об уроке Информация об уроке Информация об уроке Lorem
