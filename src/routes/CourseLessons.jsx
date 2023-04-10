@@ -15,6 +15,7 @@ import { Link, NavLink, useLoaderData } from "react-router-dom";
 import { fetchLessons } from "../http/lessonsApi.js";
 import { useSelector, useDispatch } from "react-redux";
 import { setLessons, setSelectedLesson } from "../store/slices/lessonSlice.js";
+import { toDate, toTime } from "../helpers/dateTime.js";
 
 const layout = {
   labelCol: {
@@ -106,12 +107,18 @@ const CourseLessons = () => {
               key={lessonItem.id}
               type="inner"
               title={`Урок №${lessonItem.number} ${lessonItem.name}`}
-              extra={<p>{lessonItem.datetime}</p>}
+              extra={
+                <p>
+                  {toDate(lessonItem.datetime) +
+                    " " +
+                    toTime(lessonItem.datetime)}
+                </p>
+              }
               hoverable
               style={{ marginBottom: 20 }}
               onClick={click(lessonItem)}
             >
-              <p>{lessonItem.datetime}</p>
+              <p>{lessonItem.name}</p>
             </Card>
           </Link>
         ))}
