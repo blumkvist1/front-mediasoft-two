@@ -6,25 +6,15 @@ import {
   NotificationOutlined,
   MessageOutlined,
 } from "@ant-design/icons";
-
-import {
-  Layout,
-  theme,
-  Badge,
-  Space,
-  Drawer,
-  Avatar,
-  Row,
-  Col,
-} from "antd";
+import { Layout, theme, Badge, Space, Drawer, Avatar, Row, Col } from "antd";
 import React, { useState, useEffect } from "react";
-import SideBar from "../components/SideBar/SideBar";
 import { Outlet } from "react-router-dom";
-import Profile from "../components/Profile/Profile";
-import Chat from "../components/Chat/Chat";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo } from "../store/slices/userSlice";
 import { getUser } from "../http/userApi";
+import SideBar from "../components/SideBar/SideBar";
+import Profile from "../components/Profile/Profile";
+import Chat from "../components/Chat/Chat";
 
 const { Header, Content } = Layout;
 

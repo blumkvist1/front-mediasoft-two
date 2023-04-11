@@ -1,7 +1,6 @@
 import React from "react";
-import { useLoaderData, useParams } from "react-router-dom";
-import { Card, List, Avatar, Empty} from "antd";
-import { Link } from "react-router-dom";
+import { useLoaderData, useParams, Link } from "react-router-dom";
+import { Card, List, Avatar, Empty } from "antd";
 import { fetchLesson } from "../http/lessonsApi";
 
 import { useSelector } from "react-redux";
@@ -31,8 +30,6 @@ const Lesson = () => {
   const course = useSelector((state) => state.course);
 
   const { lesson } = useLoaderData();
-
-
 
   return (
     <Card

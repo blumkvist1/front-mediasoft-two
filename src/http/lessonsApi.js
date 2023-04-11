@@ -20,4 +20,3 @@ export const createLesson = async (lesson, name) => {
   });
   return data;
 };
-

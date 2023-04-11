@@ -1,4 +1,4 @@
-import { RouterProvider, useNavigate } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { authRouter, publicRouter } from "./routes/routers";
 import { Spin } from "antd";
@@ -11,8 +11,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
-
-  const navigate = useNavigate;
 
   useEffect(() => {
     check()
