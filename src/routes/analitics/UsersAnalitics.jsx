@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { fetchUsersAnalitics } from "../../http/analiticsApi";
-import { Table, Progress } from "antd";
+import { Table } from "antd";
 import { useLoaderData } from "react-router-dom";
+import { toDate } from "../../helpers/dateTime";
 
 const columns = [
   {
@@ -29,9 +30,7 @@ const columns = [
     dataIndex: "createdAt",
     key: "createdAt",
     render: (text) => {
-      let date = new Date(Date.parse(text));
-      date = date.toLocaleDateString("en-US");
-      return <a style={{ color: "black" }}>{date}</a>;
+      return <a style={{ color: "black" }}>{toDate(text)}</a>;
     },
   },
   {
