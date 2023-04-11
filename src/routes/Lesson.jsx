@@ -1,9 +1,8 @@
 import React from "react";
 import { useLoaderData, useParams } from "react-router-dom";
-import { Card, List, Avatar, Empty, Upload, Button } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Card, List, Avatar, Empty} from "antd";
 import { Link } from "react-router-dom";
-import { fetchLesson, sendHomeWork } from "../http/lessonsApi";
+import { fetchLesson } from "../http/lessonsApi";
 
 import { useSelector } from "react-redux";
 
@@ -33,9 +32,7 @@ const Lesson = () => {
 
   const { lesson } = useLoaderData();
 
-  const sendFile = ({ file }) => {
-    sendHomeWork(file);
-  };
+
 
   return (
     <Card
@@ -43,12 +40,6 @@ const Lesson = () => {
       extra={<p>More</p>}
     >
       <div>
-        <h1>Прикрепить ответ</h1>
-
-        <Upload customRequest={sendFile} listType="picture">
-          <Button icon={<UploadOutlined />}>Загрузить файл</Button>
-        </Upload>
-
         <h1> Об уроке</h1>
         <p>
           Информация об уроке Информация об уроке Информация об уроке Lorem
@@ -67,7 +58,6 @@ const Lesson = () => {
               width="1120"
               height="630"
               src={lesson.video.replace("youtu.be", "www.youtube.com/embed")}
-              // src="https://www.youtube.com/embed/OdEQQ4bjvWA"
               allow="fullscreen"
               title="video"
             ></iframe>
