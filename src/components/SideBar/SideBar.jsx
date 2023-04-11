@@ -49,17 +49,23 @@ const SideBar = ({ collapsed }) => {
           </Menu.Item>
         </Menu.ItemGroup>
         <Menu.ItemGroup key="gr2" title="Мои курсы">
-          {course.courses.map((courseItem) => (
-            <Menu.Item
-              key={courseItem.course.id}
-              icon={<FaReact />}
-              onClick={() => dispatch(setSelectedCourse(courseItem.course))}
-            >
-              <Link to={`/${courseItem.course.workname}`}>
-                <span>{courseItem.course.name}</span>
-              </Link>
+          {course.courses.length ? (
+            course.courses.map((courseItem) => (
+              <Menu.Item
+                key={courseItem.course.id}
+                icon={<FaReact />}
+                onClick={() => dispatch(setSelectedCourse(courseItem.course))}
+              >
+                <Link to={`/${courseItem.course.workname}`}>
+                  <span>{courseItem.course.name}</span>
+                </Link>
+              </Menu.Item>
+            ))
+          ) : (
+            <Menu.Item key="-1">
+              <div>У вас пока нет курсов</div>
             </Menu.Item>
-          ))}
+          )}
         </Menu.ItemGroup>
         <Menu.ItemGroup key="gr3" title="Apps">
           <Menu.Item key="igr5" icon={<CalendarOutlined />}>

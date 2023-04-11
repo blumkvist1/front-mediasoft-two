@@ -46,7 +46,7 @@ const CourseLessons = () => {
   const dispatch = useDispatch();
   const course = useSelector((state) => state.course);
   const { courseLessons } = useLoaderData();
-  const lessons = courseLessons.lessons;
+  const lessons = courseLessons !== null ? courseLessons.lessons : [];
   const navigate = useNavigate();
   const click = (lessonItem) => {
     dispatch(setSelectedLesson(lessonItem));
@@ -92,33 +92,37 @@ const CourseLessons = () => {
           </Space>
         }
       >
-        {lessons.map((lessonItem) => (
-          <>
-            <h1>Урок №{lessonItem.number}</h1>
-            <Link
-              to={`/${course.selectedCourse.workname}/lesson/${lessonItem.number}`}
-              key={lessonItem.id}
-            >
-              <Card
+        {lessons.length ? (
+          lessons.map((lessonItem) => (
+            <>
+              <h1>Урок №{lessonItem.number}</h1>
+              <Link
+                to={`/${course.selectedCourse.workname}/lesson/${lessonItem.number}`}
                 key={lessonItem.id}
-                type="inner"
-                title={`${lessonItem.name}`}
-                extra={
-                  <p>
-                    {toDate(lessonItem.datetime) +
-                      " " +
-                      toTime(lessonItem.datetime)}
-                  </p>
-                }
-                hoverable
-                style={{ marginBottom: 20 }}
-                onClick={click(lessonItem)}
               >
-                <p>{lessonItem.name}</p>
-              </Card>
-            </Link>
-          </>
-        ))}
+                <Card
+                  key={lessonItem.id}
+                  type="inner"
+                  title={`${lessonItem.name}`}
+                  extra={
+                    <p>
+                      {toDate(lessonItem.datetime) +
+                        " " +
+                        toTime(lessonItem.datetime)}
+                    </p>
+                  }
+                  hoverable
+                  style={{ marginBottom: 20 }}
+                  onClick={click(lessonItem)}
+                >
+                  <p>{lessonItem.name}</p>
+                </Card>
+              </Link>
+            </>
+          ))
+        ) : (
+          <div>В этом курсе пока нет уроков или этого курса не существует</div>
+        )}
       </Card>
       <Modal
         title="Создание урока"

@@ -8,6 +8,7 @@ import Pomodoro from "./apps/Pomodoro";
 import Lesson, { loader as lessonLoader } from "./Lesson";
 import CourseInfo from "./CourseInfo";
 import Auth from "./Auth/Auth";
+import ErrorPage from "./ErrorPage";
 import CoursesAnalitics, {
   loader as coursesAnaliticsLoader,
 } from "./analitics/CoursesAnalitics";
@@ -19,6 +20,7 @@ export let authRouter = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "",
@@ -75,10 +77,6 @@ export let authRouter = createBrowserRouter([
   {
     path: "/registration",
     element: <Auth />,
-  },
-  {
-    path: "*",
-    element: <h1>404</h1>,
   },
 ]);
 
