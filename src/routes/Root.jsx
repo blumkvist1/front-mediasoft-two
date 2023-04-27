@@ -6,7 +6,7 @@ import {
   NotificationOutlined,
   MessageOutlined,
 } from "@ant-design/icons";
-import { Layout, theme, Badge, Space, Drawer, Avatar, Row, Col } from "antd";
+import { Layout, theme, Badge, Space, Drawer, Avatar, Row, Col, Button } from "antd";
 import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -41,7 +41,7 @@ const Root = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout hasSider>
       <SideBar collapsed={collapsed} />
       <Layout className="site-layout">
         <Header
@@ -52,13 +52,20 @@ const Root = () => {
         >
           <Row align="middle">
             <Col span={6}>
-              {React.createElement(
-                collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-                {
-                  className: "trigger",
-                  onClick: () => setCollapsed(!collapsed),
-                }
-              )}
+              {
+                <Button
+                  type="text"
+                  icon={
+                    collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />
+                  }
+						onClick={() => setCollapsed(!collapsed)}
+                  style={{
+                    fontSize: "16px",
+                    width: 64,
+                    height: 64,
+                  }}
+                />
+              }
             </Col>
             <Col span={6} offset={12}>
               <Row align="middle" justify="end">

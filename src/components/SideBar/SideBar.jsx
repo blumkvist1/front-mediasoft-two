@@ -9,7 +9,7 @@ import {
 import { FaReact, FaJava } from "react-icons/fa";
 import { Layout, Menu } from "antd";
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchCourses } from "../../http/coursesApi";
 import { useSelector, useDispatch } from "react-redux";
 import { setCourses, setSelectedCourse } from "../../store/slices/courseSlice";
@@ -20,12 +20,39 @@ const SideBar = ({ collapsed }) => {
   const course = useSelector((state) => state.course);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCourses(user.user.id).then((data) => {
       dispatch(setCourses(data));
     });
   }, [dispatch]);
+
+  function getCourses() {
+    let courses = [];
+    course.courses.map((courseItem) => {
+      courses.push({
+        key: `course${courseItem.course.id}`,
+        route: courseItem.course.workname,
+        label: courseItem.course.name,
+      });
+    });
+    return courses;
+  }
+
+  const handleClickMenuItem = (props) => {
+
+    if (props.key.includes("course")) {
+     let courseId = props.key.replace("course", "");
+      dispatch(
+        setSelectedCourse(
+          course.courses.find((el) => el.courseId === Number(courseId))
+        )
+      );
+    }
+	 console.log(course.setSelectedCourse)
+    navigate(props.item.props.route);
+  };
 
   return (
     <Sider
@@ -40,7 +67,74 @@ const SideBar = ({ collapsed }) => {
       ) : (
         <div className="logo">MEDIASOFT</div>
       )}
-      <Menu onClick={() => {}} style={{}} mode="inline" theme="light">
+      <Menu
+        theme="light"
+        mode="inline"
+        defaultSelectedKeys={["1"]}
+        onClick={(props) => handleClickMenuItem(props)}
+        items={[
+          {
+            key: "main",
+            icon: <ProjectOutlined />,
+            label: "Главное о главном",
+            route: "/",
+          },
+          {
+            key: "gr1",
+            label: "Мои курсы",
+            type: "group",
+            children: course.courses.length
+              ? getCourses()
+              : [{ key: "-1", label: "у вас пока нет курсов" }],
+          },
+          {
+            key: "gr2",
+            label: "Apps",
+            type: "group",
+            children: [
+              {
+                key: "calendar",
+                icon: <CalendarOutlined />,
+                label: "Calendar",
+                route: "calendar",
+              },
+              {
+                key: "kanban",
+                icon: <ProjectOutlined />,
+                label: "Kanban",
+                route: "kanban",
+              },
+              {
+                key: "timemanager",
+                icon: <FieldTimeOutlined />,
+                label: "TimeManager",
+                route: "pomodoro",
+              },
+            ],
+          },
+          {
+            key: "gr3",
+            label: "Аналитика",
+            type: "group",
+            children: [
+              {
+                key: "users_analitics",
+                icon: <ProjectOutlined />,
+                label: "Пользователи",
+                route: "users_analitics",
+              },
+              {
+                key: "courses_analitics",
+                icon: <FieldTimeOutlined />,
+                label: "Курсы",
+                route: "courses_analitics",
+              },
+            ],
+          },
+        ]}
+      />
+
+      {/* <Menu onClick={() => {}} style={{}} mode="inline" theme="light">
         <Menu.ItemGroup key="gr1" title="Главное">
           <Menu.Item key="igr1" icon={<FaJava />}>
             <Link to="/">
@@ -96,7 +190,7 @@ const SideBar = ({ collapsed }) => {
             </Link>
           </Menu.Item>
         </Menu.ItemGroup>
-      </Menu>
+      </Menu> */}
     </Sider>
   );
 };
