@@ -1,22 +1,27 @@
 import React from "react";
-import { useLoaderData, useParams, Link } from "react-router-dom";
-import { Card, List, Avatar, Empty } from "antd";
+import { useLoaderData } from "react-router-dom";
+import { Card, Tabs } from "antd";
 import { fetchLesson } from "../http/lessonsApi";
 
 import { useSelector } from "react-redux";
+import LessonTheory from "../components/LessonTheory";
+import Testing from "../components/Testing";
 
-const data = [
+const items = [
   {
-    title: "Полезная ссылка №1",
+    key: "1",
+    label: `Теория`,
+    children: <LessonTheory />,
   },
   {
-    title: "Полезная ссылка №2",
+    key: "2",
+    label: `Домашнее задание`,
+    children: `Пока пусто возможно прикрепление файла(фото) или текстовый ответ или ссылка(которая потом становится кликабельной) или еще какая нибудь хрень`,
   },
   {
-    title: "Полезная ссылка №3",
-  },
-  {
-    title: "Полезная ссылка №4",
+    key: "3",
+    label: `Задачи`,
+    children: <Testing />,
   },
 ];
 
@@ -26,7 +31,6 @@ export async function loader({ params }) {
 }
 
 const Lesson = () => {
-  let { id, name } = useParams();
   const course = useSelector((state) => state.course);
 
   const { lesson } = useLoaderData();
@@ -36,70 +40,7 @@ const Lesson = () => {
       title={`Урок №${lesson.number} ${lesson.name} для курса ${course.selectedCourse.name}`}
       extra={<p>More</p>}
     >
-      <div>
-        <h1> Об уроке</h1>
-        <p>
-          Информация об уроке Информация об уроке Информация об уроке Lorem
-          ipsum, dolor sit amet consectetur adipisicing elit. Ex, hic? Excepturi
-          temporibus magni placeat fugit eos aspernatur sequi, ratione maxime
-          expedita recusandae! Voluptates blanditiis porro fugit ad, quam neque
-          ex.
-        </p>
-      </div>
-      <br />
-      <div>
-        <h1>Видеозапись урока</h1>
-        <>
-          {lesson.video.includes("youtu.be") ? (
-            <iframe
-              width="1120"
-              height="630"
-              src={lesson.video.replace("youtu.be", "www.youtube.com/embed")}
-              allow="fullscreen"
-              title="video"
-            ></iframe>
-          ) : (
-            <Empty description="Видео в данный момент недоступно, пожалуйста перезвоните позднее" />
-          )}
-        </>
-      </div>
-      <br />
-      <br />
-      <div>
-        <h1>Материалы урока</h1>
-        <Link to="">{lesson.presentation}</Link>
-      </div>
-      <br />
-      <br />
-      <div>
-        <h1>Домашнее задание</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis et
-          voluptates, praesentium dolorum porro sit dicta itaque optio beatae,
-          numquam iste harum, eos odio quisquam eum maxime ad unde quidem!
-        </p>
-        <Link to="">
-          ДЗ урока №{id} курса {name}
-        </Link>
-      </div>
-      <br />
-      <br />
-      <h1> Полезные ссылки</h1>
-      <List
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item) => (
-          <Link to="">
-            <List.Item>
-              <List.Item.Meta
-                avatar={<Avatar src="https://joesch.moe/api/v1/random" />}
-                title={item.title}
-                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-              />
-            </List.Item>
-          </Link>
-        )}
-      />
+      <Tabs defaultActiveKey="1" items={items} />
     </Card>
   );
 };
