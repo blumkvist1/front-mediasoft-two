@@ -82,11 +82,8 @@ export let authRouter = createBrowserRouter([
 
 export let publicRouter = createBrowserRouter([
   {
-    path: "/",
-    element: <div></div>,
-  },
-  {
     path: "/login",
+    index: true,
     element: <Auth />,
   },
   {
