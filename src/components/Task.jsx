@@ -25,7 +25,7 @@ const Task = ({ params }) => {
             <Card
               style={{
                 height: "306px",
-                width: 530,
+                width: 508,
               }}
             >
               Какой то wfrfr вопрос пока хз какой не еrfsбrfsу!!!!!!!!!!!!!!!!!
@@ -33,7 +33,7 @@ const Task = ({ params }) => {
             </Card>
           </Col>
           <Col flex={3}>
-            <Card style={{ height: "306px", width: 530 }}>
+            <Card style={{ height: "306px", width: 508 }}>
               <h3>Выберите один вариант ответа</h3>
               <Radio.Group onChange={onChange} value={value}>
                 <Space direction="vertical">
@@ -73,7 +73,7 @@ const Task = ({ params }) => {
             <Card
               style={{
                 height: "306px",
-                width: 530,
+                width: 508,
               }}
             >
               Какой то wfrfr вопрос пока хз какой не еrfsбrfsу!!!!!!!!!!!!!!!!!
@@ -81,7 +81,7 @@ const Task = ({ params }) => {
             </Card>
           </Col>
           <Col flex={3}>
-            <Card style={{ height: "306px", width: 530 }}>
+            <Card style={{ height: "306px", width: 508 }}>
               <h3>Выберите несколько вариантов ответа</h3>
               <Checkbox.Group onChange={onChangeCheckbox}>
                 <Space direction="vertical">
@@ -113,14 +113,14 @@ const Task = ({ params }) => {
             <Card
               style={{
                 height: "306px",
-                width: 530,
+                width: 508,
               }}
             >
               {question}
             </Card>
           </Col>
           <Col flex={3}>
-            <Card style={{ height: "306px", width: 530 }}>
+            <Card style={{ height: "306px", width: 508 }}>
               <h3>Введите ваш ответ</h3>
               <TextArea
                 value={value}

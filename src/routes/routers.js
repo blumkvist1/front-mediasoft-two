@@ -15,6 +15,8 @@ import CoursesAnalitics, {
 import UsersAnalitics, {
   loader as usersAnaliticsLoader,
 } from "./analitics/UsersAnalitics";
+import LessonTheory from "../components/LessonTheory";
+import Testing from "../components/Testing";
 
 export let authRouter = createBrowserRouter([
   {
@@ -41,6 +43,20 @@ export let authRouter = createBrowserRouter([
         path: ":name/lesson/:id",
         loader: lessonLoader,
         element: <Lesson />,
+        children: [
+          {
+            path: "theory",
+            element: <LessonTheory />,
+          },
+          {
+            path: "homework",
+            element: <div>homework</div>,
+          },
+          {
+            path: "testing",
+            element: <Testing />,
+          },
+        ],
       },
       {
         path: ":name/info",

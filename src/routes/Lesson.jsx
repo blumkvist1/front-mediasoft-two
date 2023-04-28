@@ -1,27 +1,25 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
-import { Card, Tabs } from "antd";
+import { Link, Outlet, useLoaderData } from "react-router-dom";
+import { Card, Layout, Menu, theme } from "antd";
 import { fetchLesson } from "../http/lessonsApi";
-
 import { useSelector } from "react-redux";
-import LessonTheory from "../components/LessonTheory";
-import Testing from "../components/Testing";
+import { Content } from "antd/es/layout/layout";
 
 const items = [
   {
     key: "1",
-    label: `Теория`,
-    children: <LessonTheory />,
+    label: <Link to="theory">Теория</Link>,
+    // children: <LessonTheory />,
   },
   {
     key: "2",
-    label: `Домашнее задание`,
-    children: `Пока пусто возможно прикрепление файла(фото) или текстовый ответ или ссылка(которая потом становится кликабельной) или еще какая нибудь хрень`,
+    label: <Link to="homework">Домашнее задание</Link>,
+    //children: `Пока пусто возможно прикрепление файла(фото) или текстовый ответ или ссылка(которая потом становится кликабельной) или еще какая нибудь хрень`,
   },
   {
     key: "3",
-    label: `Задачи`,
-    children: <Testing />,
+    label: <Link to="testing">Задачи</Link>,
+    //children: <Testing />,
   },
 ];
 
@@ -31,6 +29,10 @@ export async function loader({ params }) {
 }
 
 const Lesson = () => {
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+
   const course = useSelector((state) => state.course);
 
   const { lesson } = useLoaderData();
@@ -40,7 +42,17 @@ const Lesson = () => {
       title={`Урок №${lesson.number} ${lesson.name} для курса ${course.selectedCourse.name}`}
       extra={<p>More</p>}
     >
-      <Tabs defaultActiveKey="1" items={items} />
+      <Layout>
+        <Menu mode="horizontal" items={items} />
+        <Content
+          style={{
+            padding: 16,
+            background: colorBgContainer,
+          }}
+        >
+          <Outlet />
+        </Content>
+      </Layout>
     </Card>
   );
 };
