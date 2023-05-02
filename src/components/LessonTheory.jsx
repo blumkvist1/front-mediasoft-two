@@ -40,7 +40,7 @@ const LessonTheory = () => {
         <>
           {lesson.video.includes("youtu.be") ? (
             <iframe
-              width="1120"
+              width="1080"
               height="630"
               src={lesson.video.replace("youtu.be", "www.youtube.com/embed")}
               allow="fullscreen"

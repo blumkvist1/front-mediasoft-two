@@ -1,4 +1,4 @@
-import { $authHost, $host } from "./index";
+import { $authHost } from "./index";
 
 export const fetchLessons = async (name) => {
   const { data } = await $authHost.get("api/" + name);

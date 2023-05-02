@@ -27,6 +27,7 @@ export let authRouter = createBrowserRouter([
       {
         path: "",
         element: (
+          // eslint-disable-next-line jsx-a11y/alt-text
           <img
             src="https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*WzMpTIP8R6gAAAAAAAAAAABkARQnAQ"
             width={1200}
@@ -46,6 +47,7 @@ export let authRouter = createBrowserRouter([
         children: [
           {
             path: "theory",
+            index: true, // don't work ??WHERE??
             element: <LessonTheory />,
           },
           {

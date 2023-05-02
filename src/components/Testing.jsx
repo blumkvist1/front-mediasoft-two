@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, message, Steps, theme } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { fetchTesting } from "../http/testingApi";
 import Task from "./Task";
 
 const steps = [
@@ -34,40 +36,20 @@ const steps = [
       />
     ),
   },
-  {
-    key: "3",
-    title: "Task 3",
-    content: "Last-content",
-  },
-  {
-    key: "3",
-    title: "Task 3",
-    content: "Last-content",
-  },
-  {
-    key: "3",
-    title: "Task 3",
-    content: "Last-content",
-  },
-  {
-    key: "3",
-    title: "Task 3",
-    content: "Last-content",
-  },
-  {
-    key: "3",
-    title: "Task 3",
-    content: "Last-content",
-  },
-  {
-    key: "3",
-    title: "Task 3",
-    content: "Last-content",
-  },
 ];
+
+
 const Testing = () => {
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
+
+  const lesson = useSelector((state) => state.lesson);
+
+  console.log(lesson.selectedLesson)
+
+  useEffect(() => {
+   fetchTesting(lesson.selectedLesson.id).then(data => console.log(data));
+  });
 
   const next = () => {
     setCurrent(current + 1);

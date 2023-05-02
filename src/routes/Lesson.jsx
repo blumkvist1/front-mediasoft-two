@@ -9,7 +9,6 @@ const items = [
   {
     key: "1",
     label: <Link to="theory">Теория</Link>,
-    // children: <LessonTheory />,
   },
   {
     key: "2",
@@ -24,6 +23,7 @@ const items = [
 ];
 
 export async function loader({ params }) {
+
   const lesson = await fetchLesson(params.id, params.name);
   return { lesson };
 }
@@ -40,10 +40,9 @@ const Lesson = () => {
   return (
     <Card
       title={`Урок №${lesson.number} ${lesson.name} для курса ${course.selectedCourse.name}`}
-      extra={<p>More</p>}
     >
       <Layout>
-        <Menu mode="horizontal" items={items} />
+        <Menu mode="horizontal" items={items} defaultSelectedKeys={"1"} />
         <Content
           style={{
             padding: 16,
