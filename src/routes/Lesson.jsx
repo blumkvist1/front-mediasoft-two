@@ -8,7 +8,7 @@ import { Content } from "antd/es/layout/layout";
 const items = [
   {
     key: "1",
-    label: <Link to="theory">Теория</Link>,
+    label: <Link to="">Теория</Link>,
   },
   {
     key: "2",
@@ -23,7 +23,6 @@ const items = [
 ];
 
 export async function loader({ params }) {
-
   const lesson = await fetchLesson(params.id, params.name);
   return { lesson };
 }

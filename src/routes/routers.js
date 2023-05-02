@@ -46,7 +46,7 @@ export let authRouter = createBrowserRouter([
         element: <Lesson />,
         children: [
           {
-            path: "theory",
+            path: "",
             index: true, // don't work ??WHERE??
             element: <LessonTheory />,
           },

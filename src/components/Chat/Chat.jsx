@@ -15,7 +15,6 @@ const Chat = () => {
   const sendMessages = (mess, dialog) => {
     if (mess.length > 0) {
       if (dialog === "Администратор") {
-        console.log(mess);
         const ms = [...messageA, mess];
         setMessages(ms);
         setMessagesA(ms);

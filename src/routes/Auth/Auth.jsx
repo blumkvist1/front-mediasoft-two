@@ -24,7 +24,6 @@ const Auth = () => {
       let data;
       if (isLogin) {
         data = await login(email, password);
-        //console.log(data);
       } else {
         data = await registration(email, password);
       }

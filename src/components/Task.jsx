@@ -3,14 +3,14 @@ import { Card, Row, Col, Radio, Space, Checkbox, Input } from "antd";
 const { TextArea } = Input;
 
 const Task = ({ params }) => {
-  const { type, question, optionalAnswer } = params;
+  const { type, question, optionsAnswer } = params;
   const [value, setValue] = useState(0);
   const onChange = (e) => {
-    console.log("radio checked", e.target.value);
+    //console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
   const onChangeCheckbox = (checkedValues) => {
-    console.log("checked = ", checkedValues);
+    //console.log("checked = ", checkedValues);
   };
   if (type === "radio") {
     return (
@@ -37,8 +37,8 @@ const Task = ({ params }) => {
               <h3>Выберите один вариант ответа</h3>
               <Radio.Group onChange={onChange} value={value}>
                 <Space direction="vertical">
-                  {optionalAnswer.length ? (
-                    optionalAnswer.map((item) => (
+                  {optionsAnswer.length ? (
+                    optionsAnswer.map((item) => (
                       <Radio value={item}>{item}</Radio>
                     ))
                   ) : (

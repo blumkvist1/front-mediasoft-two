@@ -113,7 +113,7 @@ const CourseLessons = () => {
                   }
                   hoverable
                   style={{ marginBottom: 20 }}
-                  onClick={click(lessonItem)}
+                  onClick={() => click(lessonItem)}
                 >
                   <p>{lessonItem.name}</p>
                 </Card>
