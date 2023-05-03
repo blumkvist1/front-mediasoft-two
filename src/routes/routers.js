@@ -17,6 +17,7 @@ import UsersAnalitics, {
 } from "./analitics/UsersAnalitics";
 import LessonTheory from "../components/LessonTheory";
 import Testing from "../components/Testing";
+import Homework from "../components/Homework";
 
 export let authRouter = createBrowserRouter([
   {
@@ -52,7 +53,7 @@ export let authRouter = createBrowserRouter([
           },
           {
             path: "homework",
-            element: <div>homework</div>,
+            element: <Homework/>,
           },
           {
             path: "testing",
