@@ -28,8 +28,7 @@ const Task = ({ params }) => {
                 width: 508,
               }}
             >
-              Какой то wfrfr вопрос пока хз какой не еrfsбrfsу!!!!!!!!!!!!!!!!!
-              kfekfk mlvkfkv kerwfvnkonv ewjn vfjweofn eowfnowvno wpefvnnevfjrfn
+              {question}
             </Card>
           </Col>
           <Col flex={3}>
@@ -37,22 +36,10 @@ const Task = ({ params }) => {
               <h3>Выберите один вариант ответа</h3>
               <Radio.Group onChange={onChange} value={value}>
                 <Space direction="vertical">
-                  {optionsAnswer.length ? (
+                  {optionsAnswer.length &&
                     optionsAnswer.map((item) => (
                       <Radio value={item}>{item}</Radio>
-                    ))
-                  ) : (
-                    <>
-                      <Radio value={1}>
-                        Какой то t,fnm rfrjq jndtn пока хз какой не
-                        ебrfgfgnу!!!!!!!!!!!!!!!!! kfekfk mlvkfkv kerwfvnkonv
-                        ewjn vfjweofn eowfnowvno wpefvnnevfjrfn
-                      </Radio>
-                      <Radio value={2}>B</Radio>
-                      <Radio value={3}>C</Radio>
-                      <Radio value={4}>D</Radio>
-                    </>
-                  )}
+                    ))}
                 </Space>
               </Radio.Group>
             </Card>
@@ -76,8 +63,7 @@ const Task = ({ params }) => {
                 width: 508,
               }}
             >
-              Какой то wfrfr вопрос пока хз какой не еrfsбrfsу!!!!!!!!!!!!!!!!!
-              kfekfk mlvkfkv kerwfvnkonv ewjn vfjweofn eowfnowvno wpefvnnevfjrfn
+              {question}
             </Card>
           </Col>
           <Col flex={3}>
@@ -85,14 +71,10 @@ const Task = ({ params }) => {
               <h3>Выберите несколько вариантов ответа</h3>
               <Checkbox.Group onChange={onChangeCheckbox}>
                 <Space direction="vertical">
-                  <Checkbox value={1}>
-                    Какой то t,fnm rfrjq jndtn пока хз какой не
-                    ебrfgfgnу!!!!!!!!!!!!!!!!! kfekfk mlvkfkv kerwfvnkonv ewjn
-                    vfjweofn eowfnowvno wpefvnnevfjrfn
-                  </Checkbox>
-                  <Checkbox value={2}>B</Checkbox>
-                  <Checkbox value={3}>C</Checkbox>
-                  <Checkbox value={4}>D</Checkbox>
+                  {optionsAnswer.length &&
+                    optionsAnswer.map((item) => (
+                      <Checkbox value={item}>{item}</Checkbox>
+                    ))}
                 </Space>
               </Checkbox.Group>
             </Card>

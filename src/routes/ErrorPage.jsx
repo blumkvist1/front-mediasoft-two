@@ -1,5 +1,5 @@
-import { Button, Result } from "antd";
-import { useRouteError } from "react-router-dom";
+import { Result } from "antd";
+import { useRouteError, NavLink } from "react-router-dom";
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -9,7 +9,7 @@ const ErrorPage = () => {
       status="404"
       title="404"
       subTitle={error.statusText || error.message}
-      extra={<Button type="primary">Back Home</Button>}
+      extra={<NavLink to="/">Back Home</NavLink>}
     />
   );
 };
