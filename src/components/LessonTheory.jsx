@@ -59,19 +59,6 @@ const LessonTheory = () => {
       </div>
       <br />
       <br />
-      <div>
-        <h1>Домашнее задание</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis et
-          voluptates, praesentium dolorum porro sit dicta itaque optio beatae,
-          numquam iste harum, eos odio quisquam eum maxime ad unde quidem!
-        </p>
-        <Link to="">
-          ДЗ урока №{id} курса {name}
-        </Link>
-      </div>
-      <br />
-      <br />
       <h1> Полезные ссылки</h1>
       <List
         itemLayout="horizontal"
