@@ -10,7 +10,7 @@ const Task = ({ params }) => {
     setValue(e.target.value);
   };
   const onChangeCheckbox = (checkedValues) => {
-    //console.log("checked = ", checkedValues);
+    console.log("checked = ", checkedValues);
   };
   if (type === "radio") {
     return (
@@ -20,19 +20,19 @@ const Task = ({ params }) => {
           height: "360px",
         }}
       >
-        <Row gutter={[16, 16]} style={{ position: "fixed" }}>
+        <Row gutter={[16, 16]}>
           <Col flex={3}>
             <Card
               style={{
                 height: "306px",
-                width: 508,
+                width: 500,
               }}
             >
               {question}
             </Card>
           </Col>
           <Col flex={3}>
-            <Card style={{ height: "306px", width: 508 }}>
+            <Card style={{ height: "306px", width: 500 }}>
               <h3>Выберите один вариант ответа</h3>
               <Radio.Group onChange={onChange} value={value}>
                 <Space direction="vertical">
@@ -55,19 +55,19 @@ const Task = ({ params }) => {
           height: "360px",
         }}
       >
-        <Row gutter={[16, 16]} style={{ position: "fixed" }}>
+        <Row gutter={[16, 16]}>
           <Col flex={3}>
             <Card
               style={{
                 height: "306px",
-                width: 508,
+                width: 500,
               }}
             >
               {question}
             </Card>
           </Col>
           <Col flex={3}>
-            <Card style={{ height: "306px", width: 508 }}>
+            <Card style={{ height: "306px", width: 500 }}>
               <h3>Выберите несколько вариантов ответа</h3>
               <Checkbox.Group onChange={onChangeCheckbox}>
                 <Space direction="vertical">
@@ -90,19 +90,19 @@ const Task = ({ params }) => {
           height: "360px",
         }}
       >
-        <Row gutter={[16, 16]} style={{ position: "fixed" }}>
+        <Row gutter={[16, 16]}>
           <Col flex={3}>
             <Card
               style={{
                 height: "306px",
-                width: 508,
+                width: 500,
               }}
             >
               {question}
             </Card>
           </Col>
           <Col flex={3}>
-            <Card style={{ height: "306px", width: 508 }}>
+            <Card style={{ height: "306px", width: 500 }}>
               <h3>Введите ваш ответ</h3>
               <TextArea
                 value={value}

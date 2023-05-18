@@ -1,12 +1,11 @@
 import React from "react";
-import { Button, Empty, message, theme, Tabs } from "antd";
+import { Button, Row, Col, Empty, message, Tabs } from "antd";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { fetchTesting } from "../http/testingApi";
 import Task from "./Task";
 
 const Testing = () => {
-  const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
   const [tasks, setTasks] = useState([]);
   const [testingData, setTestingData] = useState({});
@@ -26,12 +25,7 @@ const Testing = () => {
   const prev = () => {
     setCurrent(current - 1);
   };
-  const onChange = (value) => {
-    console.log("onChange:", value);
-    setCurrent(value);
-  };
 
-  console.log(tasks);
   return (
     <>
       {testingData ? (
@@ -39,7 +33,9 @@ const Testing = () => {
           {tasks.length ? (
             <>
               <Tabs
-                onChange={onChange}
+                onChange={(value) => {
+                  setCurrent(Number(value));
+                }}
                 activeKey={`${current}`}
                 tabBarExtraContent={
                   <Button
@@ -72,32 +68,48 @@ const Testing = () => {
               />
               <div
                 style={{
-                  marginTop: 24,
+                  marginTop: 16,
                 }}
               >
-                {current < tasks.length - 1 && (
-                  <Button type="primary" onClick={() => next()}>
-                    Next
-                  </Button>
-                )}
-                {current === tasks.length - 1 && (
-                  <Button
-                    type="primary"
-                    onClick={() => message.success("Processing complete!")}
-                  >
-                    Done
-                  </Button>
-                )}
-                {current > 0 && (
-                  <Button
-                    style={{
-                      margin: "0 8px",
-                    }}
-                    onClick={() => prev()}
-                  >
-                    Previous
-                  </Button>
-                )}
+                <Row>
+                  <Col span={8}>
+                    <div>
+                      {current > 0 && (
+                        <Button
+                          style={{
+                            marginRight: 8,
+                          }}
+                          onClick={() => prev()}
+                        >
+                          Предыдуший
+                        </Button>
+                      )}
+                      {current < tasks.length - 1 && (
+                        <Button type="primary" onClick={() => next()}>
+                          Следующий
+                        </Button>
+                      )}
+                    </div>
+                  </Col>
+                  <Col offset={8} span={8}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      <Button
+                        type="primary"
+                        style={{}}
+                        onClick={() =>
+                          message.success("Ваши ответы отправлены!")
+                        }
+                      >
+                        Отправить
+                      </Button>
+                    </div>
+                  </Col>
+                </Row>
               </div>
             </>
           ) : (
