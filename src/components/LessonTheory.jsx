@@ -38,11 +38,11 @@ const LessonTheory = () => {
       <div>
         <h1>Видеозапись урока</h1>
         <>
-          {lesson.video.includes("youtu.be") ? (
+          {lesson.video.includes("youtube") ? (
             <iframe
               width="1080"
               height="630"
-              src={lesson.video.replace("youtu.be", "www.youtube.com/embed")}
+              src={lesson.video}
               allow="fullscreen"
               title="video"
             ></iframe>
