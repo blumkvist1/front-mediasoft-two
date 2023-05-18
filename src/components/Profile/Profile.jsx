@@ -20,8 +20,8 @@ const Profile = () => {
         <div style={{ display: "flex", justifyContent: "start" }}>
           <Space direction="vertical">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0OOKOjSzmtxdabbAdFPiCBMd8VTfJlb5Cu7fmv34k&s"
-              style={{ marginBottom: 15, borderRadius: 100, marginLeft: 60 }}
+              src="https://joesch.moe/api/v1/random"
+              style={{ marginLeft: 60, width: 200 }}
             />
             <div
               style={{ fontSize: 16, display: "flex", alignItems: "center" }}
